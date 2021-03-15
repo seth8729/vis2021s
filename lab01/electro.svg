@@ -45,17 +45,22 @@
 
   <path d="M256 256 V270 V242 M256 256 H270 H242" stroke="black" fill="white"></path>
   <text x="254" y="250" font-size="16" text-anchor="middle" fill="red">(256, 256)</text>
-
-  <rect x="5" y="125" fill="none" stroke="black" stroke-width="10" width="384" height="256" opacity="0.3"/>
-  <path d="M0  235 L113 235" stroke="black" stroke-width="10" opacity="0.3"></path>
-  <path d="M280  235 L384 235" stroke="black" stroke-width="10" opacity="0.3"></path>
-  <path d="M170  325 A10 13 0 0 0 215 325" stroke="black" stroke-width="7" fill="none" opacity="0.3"></path>
-  <path d="M145  384 A60 100 0 0 0 135 490 L 250 490 A60 100 0 0 0 245 384" stroke="black" stroke-width="7" fill="none" opacity="0.3"></path>
-  <path d="M135  400 A60 10 130 0 0 128 448" stroke="black" stroke-width="7" fill="none" opacity="0.3"></path>
-  <path d="M250  400 A60 10 50 0 1 255 448" stroke="black" stroke-width="7" fill="none" opacity="0.3"></path>
-  <ellipse fill="white" stroke="black" stroke-width="5" opacity="0.3" cx="144" cy="470" rx="20" ry="28"  transform="rotate(-20,145,470)" />
-  <ellipse fill="white" stroke="black" stroke-width="5" opacity="0.3" cx="244" cy="470" rx="20" ry="28"  transform="rotate(20,244,470)" />
   
+  <path d="M192 0 q-40 70, 0 64 q74 -15 0 64" stroke="black" stroke-width="10" fill="none"></path>
+  <rect x="5" y="125" fill="none" stroke="black" stroke-width="10" width="384" height="256"/>
+  <path d="M0 235 L113 235" stroke="black" stroke-width="10"></path>
+  <path d="M280 235 L384 235" stroke="black" stroke-width="10"></path>
+  <path d="M170 325 A10 13 0 0 0 215 325" stroke="black" stroke-width="7" fill="none"></path>
+  <path d="M145 384 A60 100 0 0 0 135 490 L 250 490 A60 100 0 0 0 245 384" stroke="black" stroke-width="7" fill="none"></path>
+  <path d="M135  400 A60 10 130 0 0 128 448" stroke="black" stroke-width="7" fill="none"></path>
+  <path d="M250  400 A60 10 50 0 1 255 448" stroke="black" stroke-width="7" fill="none"></path>
+  <ellipse fill="white" stroke="black" stroke-width="8" cx="144" cy="470" rx="20" ry="28"  transform="rotate(-20,145,470)" />
+  <ellipse fill="white" stroke="black" stroke-width="8" cx="244" cy="470" rx="20" ry="28"  transform="rotate(20,244,470)" />
+  <path d="M275 425 c30 -10, 50 -40, 110 5 c10 2, 30 10, 58 -40" stroke="black" stroke-width="10" fill="none"></path>
+  <path d="M440 360 c-13 30, 15 40, 29 13z" stroke="black" stroke-width="10" fill="none"></path>
+  <path d="M450 365 q10 -40 8 -5 q20 -25 5 5" stroke="black" stroke-width="10" fill="none"></path>
+  <path d="M435 310 q-15 30, 0 15 q15 -10 0 17 " stroke="black" stroke-width="10" fill="none"></path>
+  <path d="M512 332 q-30 5, -15 10 q15 10 -15 10" stroke="black" stroke-width="10" fill="none"></path>
 </svg>
 
     
