@@ -110,10 +110,9 @@
 					}
 				
                     //clear container
-                    if (treemapContainer.innerHTML.length) {
-                        treemapContainer.innerHTML = ''
-                    }
-
+					if (treemapContainer.innerHTML.length) {
+						treemapContainer.innerHTML = ''
+					}
 
                     dataClassifier(objectKeys.value, function(data, layers){
                         node = getNode(data, layers, treemapContainer)
@@ -121,7 +120,23 @@
                     })
 				})
 
-				document.getElementById('dropfile').addEventListener('dragover',function(evt){
+				d3.csv("108.csv", function(csvFile) {
+    				var fr = new FileReader()
+
+                	fr.onload = function(){
+                    	dataLoader(fr.result, function(){
+							dataClassifier(objectKeys.value, function(data, layers){
+								node = getNode(data, layers, treemapContainer)
+								treemapContainer.innerHTML = node.innerHTML
+							}) 
+						})			                         
+                	}
+					fr.readAsText(csvFile)
+				})
+
+				
+
+				/*document.getElementById('dropfile').addEventListener('dragover',function(evt){
 					evt.preventDefault()
 				})
 
@@ -155,10 +170,11 @@
 						
 						fr.readAsText(csvFile)
 					}
-				})
+				})*/
 			})
 			
 		</script>
+
 	</body>
 	
 </html>
