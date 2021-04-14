@@ -120,7 +120,7 @@
                     })
 				})
 
-				dataLoader('outputTable.csv', function(){
+				dataLoader('output.csv', function(){
 					dataClassifier(objectKeys.value, function(data, layers){
 						node = getNode(data, layers, treemapContainer)
 						treemapContainer.append(node)
