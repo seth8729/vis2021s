@@ -80,9 +80,9 @@
 			<li><a href="http://blog.infographics.tw/2015/10/d3js-tutorial-treemap-and-budget/">D3.js 實戰 － 利用 Treemap Layout 將政府預算視覺化</a></li>
 		</ul>
 
-		<div id="dropfile" for="csvfile">
+		<!-- <div id="dropfile" for="csvfile">
 			CSV 資料扔過來! Drop your CSV here.
-		</div>
+		</div> -->
 		<div>
 			<select id="ObjectKeys">
 				<option value="selectValue">
@@ -120,77 +120,50 @@
                     })
 				})
 
-				d3.csv("108.csv", function(error, rows) {
-					var files = new File(rows, "108.csv");
-					console.log(files)
-					console.log(rows)
-					if (treemapContainer.innerHTML.length) {
-						treemapContainer.innerHTML = ''
-					}
-
-					if (objectKeys.innerHTML.length) {
-						objectKeys.innerHTML = ''
-					}
-						
-					if (treemapContainer.innerHTML.length) {
-						treemapContainer.innerHTML = ''
-					}
-
-					if (objectKeys.innerHTML.length) {
-						objectKeys.innerHTML = ''
-					}
-
-					var fr = new FileReader()
-
-					fr.onload = function(){
-						dataLoader(fr.result, function(){
-							dataClassifier(objectKeys.value, function(data, layers){
-								node = getNode(data, layers, treemapContainer)
-								treemapContainer.innerHTML = node.innerHTML
-							}) 
-						})
-						console.log(fr.result)
-					}
-					fr.readAsText(files)
+				dataLoader('output.csv', function(){
+					dataClassifier(objectKeys.value, function(data, layers){
+						node = getNode(data, layers, treemapContainer)
+						treemapContainer.innerHTML = node.innerHTML
+					}) 
 				})
 
-				document.getElementById('dropfile').addEventListener('dragover',function(evt){
-					evt.preventDefault()
-				})
+				// document.getElementById('dropfile').addEventListener('dragover',function(evt){
+				// 	evt.preventDefault()
+				// })
 
-				document.getElementById('dropfile').addEventListener('drop', function(evt){
-					evt.preventDefault()
+				// document.getElementById('dropfile').addEventListener('drop', function(evt){
+				// 	evt.preventDefault()
 
-					var files = evt.dataTransfer.files
+				// 	var files = evt.dataTransfer.files
 
-					if (files.length) {
-                        if (treemapContainer.innerHTML.length) {
-                            treemapContainer.innerHTML = ''
-                        }
+				// 	if (files.length) {
+                //         if (treemapContainer.innerHTML.length) {
+                //             treemapContainer.innerHTML = ''
+                //         }
 
-                        if (objectKeys.innerHTML.length) {
-                            objectKeys.innerHTML = ''
-						}
+                //         if (objectKeys.innerHTML.length) {
+                //             objectKeys.innerHTML = ''
+				// 		}
 
-						var csvFile = files[0]
+				// 		var csvFile = files[0]
 
-						//讀取csv
-						var fr = new FileReader()
+				// 		//讀取csv
+				// 		var fr = new FileReader()
 
-                        fr.onload = function(){
-                            dataLoader(fr.result, function(){
-								dataClassifier(objectKeys.value, function(data, layers){
-									node = getNode(data, layers, treemapContainer)
-									treemapContainer.innerHTML = node.innerHTML
-								}) 
-							})
+                //         fr.onload = function(){
+                //             dataLoader(fr.result, function(){
+				// 				dataClassifier(objectKeys.value, function(data, layers){
+				// 					node = getNode(data, layers, treemapContainer)
+				// 					treemapContainer.innerHTML = node.innerHTML
+				// 				}) 
+				// 			})
 								                         
-                        }
+                //         }
 						
-						fr.readAsText(csvFile)
-						console.log(csvFile)
-					}
-				})
+				// 		fr.readAsText(csvFile)
+				// 		console.log(csvFile)
+				// 	}
+				// })
 			})
 			
 		</script>
