@@ -123,7 +123,7 @@
 				dataLoader('108.csv', function(){
 					dataClassifier(objectKeys.value, function(data, layers){
 						node = getNode(data, layers, treemapContainer)
-						treemapContainer.innerHTML = node.innerHTML
+						treemapContainer.append(node)
 					}) 
 				})
 
