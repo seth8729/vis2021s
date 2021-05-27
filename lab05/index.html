@@ -27,8 +27,8 @@
 <body>
     <script type="text/javascript">
         // Your beautiful D3 code will go here
-        var width = window.innerWidth*3/4;
-        var height = window.innerHeight*1/2;
+        var width = 1400;
+        var height = 500;
         var t = height / 39;
         var svg = d3.select("body")
                     .append("svg")
@@ -36,7 +36,7 @@
                     .attr("height", height + 40)
                     .append("g")
                     .attr("transform", "translate(30, 20)");
-
+                    
         var Converter = function (d) {
             return {
                 boundary: parseInt(d.組界),
