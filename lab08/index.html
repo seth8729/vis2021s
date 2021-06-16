@@ -1,71 +1,258 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
+
 <head>
     <meta charset="utf-8">
     <title>Lab 8</title>
+  
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@900&display=swap');
 
+        @keyframes letterDraw {
+            1% {
+                opacity: 1;
+            }
+
+            to {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+        }
+
         h1, div {
-          background-color: rgba(255, 255, 0, 0.1);
-          font-family: 'Noto Serif JP', serif;
-          font-size: 24pt;
-          border: solid 1px black;
-          width: 90%;
-          margin: 5px auto;
-          padding: 10px;
+            background-color: rgba(255, 255, 0, 0.1);
+            font-family: 'Noto Serif JP', serif;
+            font-size: 24pt;
+            border: solid 1px black;
+            width: 90%;
+            margin: 5px auto;
+            padding: 10px;
         }
 
         div {
-          font-size: 12pt;
+            font-size: 12pt;
         }
-        
+
         body {
             background-color: rgba(255, 128, 255, 0.1);
         }
-
-        video:hover {
-            box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
-        }
     </style>
-    <script src="http://d3js.org/d3.v6.min.js" charset="utf-8"></script> <!-- v6.5.0 -->
+    <script src="https://d3js.org/d3.v6.min.js" charset="utf-8"></script> <!-- v6.5.0 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+
 <body>
     <h1>
         lab08 漢字書寫 (鉛筆字) (毛筆字也OK!) Path Animation
     </h1>
     <div>
-      限定使用 D3.js，參考以下影片。
-    	<ul>
-    		<li><a href="https://bl.ocks.org/basilesimon/f164aec5758d16d51d248e41af5428e4">Animate path in D3</a></li>
-    		<li><a href="https://codepen.io/MyXoToD/post/howto-self-drawing-svg-animation">"Self-Drawing" SVG</a></li>
-    		<li><a href="https://stackoverflow.com/questions/15275362/how-to-transition-a-path-in-d3-js">How to transition a path in d3.js</a></li>
-        <li><a href="https://css-tricks.com/svg-line-animation-works/">How SVG Line Animation Works</a></li>
-        <li><a href="http://blog.roachking.net/blog/2014/10/31/osolve-team-drawing-animation/">使用 SVG 將圖片做成動畫</a></li>
-        <li><a href="https://www.hesyifei.com/">何一非</a></li>
-    	</ul>
+        限定使用 D3.js，參考以下影片。
+        <ul>
+            <li><a href="https://bl.ocks.org/basilesimon/f164aec5758d16d51d248e41af5428e4">Animate path in D3</a></li>
+            <li><a href="https://codepen.io/MyXoToD/post/howto-self-drawing-svg-animation">"Self-Drawing" SVG</a></li>
+            <li><a href="https://stackoverflow.com/questions/15275362/how-to-transition-a-path-in-d3-js">How to transition a
+                path in d3.js</a></li>
+            <li><a href="https://css-tricks.com/svg-line-animation-works/">How SVG Line Animation Works</a></li>
+            <li><a href="http://blog.roachking.net/blog/2014/10/31/osolve-team-drawing-animation/">使用 SVG 將圖片做成動畫</a></li>
+            <li><a href="https://www.hesyifei.com/">何一非</a></li>
+        </ul>
+    </div>
+
+    <div id="demo">
+        Demo
+        <br />
+        <button id="replay">Replay</button>
+        <hr>
+
+        <svg id="first" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 258 258" width="256">
+            <g id="ypath">
+                <path
+                    d="m 77,11 25,13 H 89"
+                    id="path1449" />
+                <path
+                    d="m 13.606488,73.647891 c 0.435143,0 69.547358,-16.955583 69.547358,-16.955583 l 15.923074,-2.923077 -1.6923,-1.538462 h 13.30769 l -24.153848,7.23077"
+                    id="path981" />
+                <path
+                    d="M 52.49691,101.8937 93.4759,88.761434"
+                    id="path2476" />
+                <path
+                    d="M 54.39555,134.17058 91.1026,112.81088"
+                    id="path2577" />
+                <path
+                    d="m 56.13597,153.47342 13.923363,45.56737"
+                    id="path2777" />   
+                <path
+                    d="m 53.28801,163.59951 38.52658,-12.18295 -9.572315,22.62547"
+                    id="path2779" />
+                <path
+                    d="m 63.572312,181.32015 21.517923,-9.4932 13.290485,-2.68974"
+                    id="path4494" />
+                <path
+                    d="m 138.41038,22.783684 -12.34116,41.453646 -17.4042,30.378245 -7.59456,10.917185"
+                    id="path4689" />
+                <path
+                    d="M 124,73 198.42956,55.267956"
+                    id="path4693" />
+                <path
+                    d="m 85.991712,130.45028 66.679558,-17.56492 57.95304,-6.82459 28.86464,10.4047"
+                    id="path4695" />
+                <path
+                    d="m 157.14641,69.140884 -0.89503,147.232046 -4.92265,-3.58011 16.44613,23.60635"
+                    id="path4697" />        
+            </g>
+
+            <clippath id="yclip">
+                <path fill="none" 
+                    d="M131 18q5 4 9 7q4 0 1 7q-7 17 -15 32q14 -2 39 -10q4 -1 7 -2q8 -2 8 -6q2 -5 7 -3l12 4q4 1 5 2q3 1 2 2q-1 2 -4 2q-15 0 -51 10q8 5 14 8q3 2 0 6q-5 6 -6 27q3 0 10 -1q22 -3 32 -3q6 -9 12 -5q6 3 12 4q11 3 19 10q2 3 -1 5t-6 0q-18 -13 -40 -10q-15 0 -38 5v44
+                    q-1 36 -1 50q-1 8 5 14q5 4 9 13q-1 7 -5 4q-2 -3 -9 -11q-7 -9 -10 -12q-3 -5 0 -8t7 -1q0 -16 -1 -49v-44q-12 2 -43 11q-10 3 -23 0q-3 -1 0 -1q4 0 9 -1q3 -1 5 -1q11 -2 38 -9q10 -2 14 -3q1 -31 -5 -41q-1 0 -3 1q-14 4 -22 2q-9 16 -20 30q-3 4 -1 -1q33 -55 26 -76
+                    q-2 -5 2 -2zM61 157q1 3 2 7l3 9q1 -1 7 -4q9 -3 11 -15q1 -3 0 -4l-4 1q-1 0 -4 1zM87 143q5 0 10 1q2 0 2 2q1 1 -2 3q-5 2 -10 14q2 0 5 -1q5 -1 11 -1q2 1 0 3q-1 1 -3 2l-1 1q-11 0 -20 4q-3 1 -8 2q-3 1 -4 1q2 6 5 10q2 2 0 3q-2 3 -5 0q-4 -5 -9 -8q-2 -2 0 -4
+                    q4 -3 -1 -22q-1 -4 3 2q9 -5 23 -9q1 -4 4 -3zM87 109q2 1 2 2q1 0 -1 2q-3 1 -6 5q-4 4 -8 6q-3 1 -5 3q-3 1 -3 0l2 -3q0 -1 -2 0q-5 1 -11 1q-2 -1 1 -2q9 -2 20 -11q6 -6 11 -3zM86 81q3 -2 4 0q3 4 -1 6q-4 1 -9 3q-3 2 -4 2q-6 3 -5 1q0 -2 -3 0q-5 2 -11 2q-3 0 0 -2
+                    q12 -4 14 -7q1 -1 2 -1l1 -1q3 -1 8 -2q3 -1 4 -1zM99 44q5 -1 13 1q2 0 1 2q0 1 -1 1q1 0 -2 1q-8 3 -16 4q-6 2 -10 5q-4 1 -1 -2q1 -2 1 -3h-2q-4 1 -14 4q-20 4 -28 7q-4 3 -23 1q-3 -2 0 -2q2 0 5 -1q26 -5 60 -13q2 0 5 -1q7 -1 7 -2q1 -2 5 -2zM77 5q17 5 24 9
+                    q1 1 1 4q-1 1 -3 2q-3 1 -7 0t-3 -2q2 -1 -4 -5q-1 -1 -4 -3q-2 -2 -4 -3q-1 -2 0 -2z" 
+                    id="path2"/>   
+            </clippath>
+        </svg>
+
+        <svg id="second" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 258 258" width="256">
+            <g id="xpath">  
+                <path
+                    d="m 46.461538,67.230769 68.461542,-20.461538 12.61538,1.076923"
+                    id="path4910" />
+                <path
+                    d="M 53.313253,100.30038 109.44665,81.589244 93.69231,89.076923 84.307692,99.461539"
+                    id="path5109" />
+                <path
+                    d="m 17.538462,143.23077 70.15106,-20.79251 37.313478,-8.64846 0.87029,-4.569 17.07935,5.65686"
+                    id="path4914" />
+                <path
+                    d="m 84.461538,6.4615385 4.846154,76.3846155 -2.538461,54.076926 -10.307692,37.6923 -14.282254,22.17788 -18.275991,15.39317"
+                    id="path5111" />
+                
+                <path
+                    d="m 153.61538,54.076923 36.53847,-10.307692 10.46153,9.153846 -7.38461,3.692308 -14.53846,32.230769 -11,16.230766"
+                    id="path5113" />
+                <path
+                    d="m 167.69231,105.07692 31.61538,18.07693 14.15385,14.38461 2.46154,7.53846 -40.76923,-7.30769 -15.57693,-5 -5.96154,-2.61538"
+                    id="path5150" />
+                <path
+                    d="m 152.38462,50.846154 1.15384,103.923076 -0.15384,54.30769 -3.69231,6 L 164,232.92308"
+                    id="path5152" />
+            </g>
+            <clippath id="xclip">
+                <path
+                    d="M98 77q1 -3 3 -3q2 1 7 1q7 0 11 2q1 1 1 2q-1 1 -4 2q-12 0 -17 4q-1 2 -5 5l-3 3q0 4 -1 12v11q13 -3 28 -6h1q4 -1 4 -4q-1 -5 6 -3q8 1 17 7q2 1 1 3q-2 2 -4 1q-14 -5 -29 0q-11 2 -24 6q-3 66 -45 89q-7 2 -2 -2q37 -27 42 -86q-26 7 -44 15q-13 5 -23 0
+                    q-4 -2 0 -2q13 0 28 -6q7 -2 23 -6q11 -3 17 -5v-6q1 -10 0 -15q-1 2 -4 2q-6 4 0 -2l2 -2l3 -3v-2h-1q-12 5 -28 5q-2 0 -1 -1q0 -1 2 -2q17 -3 28 -8q0 -8 -2 -25q2 12 0 -3q-21 9 -35 7q-2 -1 -2 -2l2 -1q9 -1 28 -7q5 -1 7 -2q0 -4 -1 -12q0 -7 -1 -11q0 -17 -5 -19
+                    q-1 -4 2 -1q10 6 9 11q0 5 1 15v15l4 -2q13 -5 14 -9q0 -4 7 -1q9 2 16 7q2 2 1 3q-2 1 -5 1q-12 -2 -26 5q-5 2 -3 0q1 -1 0 -1q-1 -1 -3 0q-1 0 -1 1q-1 1 -4 1q0 5 1 16v12q5 -2 7 -4zM194 35q8 8 11 12q3 2 2 4q0 1 -5 2q-7 1 -11 13q-13 27 -21 35q37 15 51 38
+                    q3 7 -3 7q-6 -1 -15 -3q-6 -2 -10 -3q-17 -3 -38 -12v33q-1 27 1 51q9 8 12 17q0 5 -5 3q-6 -2 -9 -7t-9 -11q-3 -6 7 -15v-64q-1 -22 -2 -69q-1 -12 -5 -15q-4 -2 0 -2q7 0 11 3q3 1 1 4q-1 2 -1 14q0 21 -1 55q20 10 42 8q8 0 9 -2t-5 -7q-8 -7 -29 -17q-3 -2 -5 -3t-2 -2
+                    q-1 0 1 -2q13 -14 23 -50q1 -6 -4 -5q-10 3 -26 5h-2q-4 0 0 -2q3 -1 8 -3q12 -4 18 -7q4 -6 11 -3z"
+                    id="path2" />
+            </clippath>
+        </svg>
+        <svg id="third" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  viewBox="0 0 258 258" width="256">
+            <g id="zpath"> 
+                <path
+                    d="m 81,17 20.38462,11.923077"
+                    id="path5361" />
+                <path
+                    d="M 40.461538,65.076923 C 42,64.923077 97.69231,52.923077 97.69231,52.923077 l 18.76923,-8.153846 -0.76923,-4.153846 16.07692,6.230769 L 120,46.153846 89.076923,59"
+                    id="path1208" />        
+                <path
+                    d="m 74.384615,81 c 0,0 -6.153846,13.846154 2.23077,15.384615"
+                    id="path5369" />
+                <path
+                    d="M 114.84615,64.307692 94.69231,85.461539 80.769231,96.153846"
+                    id="path5371" />
+                <path
+                    d="m 7.514491,116.0743 62.986898,-16.752992 44.819691,-11.422494 1.523,-4.133855 18.38478,8.920424"
+                    id="path949" />
+                <path
+                    d="m 78.423077,98.230769 -0.653846,7.423081 -23.230769,24.42307 -10.5,8.84616"
+                    id="path5375" />
+                <path
+                    d="m 74.076923,116.38462 17.615387,15.07692 3.46154,9.07692 L 98,154.23077 99.15385,169.15385 99,180.69231 97.84615,191.76923 93,206.38462 82.692308,221 81.538462,213.92308 62.461538,197.76923"
+                    id="path1340" />
+                <path
+                    d="M 85.73138,121.18722 65.497247,146.64307 53.615385,158.07692"
+                    id="path5379" />
+                <path
+                    d="M 97.38462,130.76923 66.461539,180.92308 44.923077,210.30769 25.409732,229.32017"
+                    id="path5381" />
+                <path
+                    d="m 128.26657,108.13294 -14.14213,17.40571 -18.60235,11.31371"
+                    id="path948" />
+                <path
+                    d="m 97.23077,143.61538 19.46154,10.23077 20.84615,17.3077"
+                    id="path1145" />
+                <path
+                    d="m 142.51749,36.551981 12.61914,10.660995 -0.38075,18.112812 -8.53967,28.501843"
+                    id="path5389" />
+                <path
+                    d="m 154,50.153846 40.76923,-16.923077 -0.92308,-4.153846 13.69231,8.461539 -8.61538,3.692307 L 191.23077,56 186,72.923077 v 6.461538 l 4.57692,0.538462 16.38462,-5.153846 -0.46154,-3.076923 7.23077,3.769231 -16.26923,4.115384 L 185.88462,90.961539 172.42308,104 l -23.86798,20.99472 -6.63593,8.15893 39.97873,-18.71114 14.19653,7.77818 -7.99575,2.2845 -13.27185,35.24655 -16.10027,26.92445 -17.62328,20.88685 L 123.48,223.7721"
+                    id="path1535" />
+                <path
+                    d="m 138.49242,144.68493 11.31371,4.24264 42.75277,57.11247 7.34303,6.90789 7.39742,3.046 41.61052,5.43928"
+                    id="path5393" />
+            </g>
+            <clippath id="zclip">
+                <path
+                        d="M82 6q18 6 23 12l1 1q-1 1 -3 2q-4 2 -7 -2q-2 -3 -8 -2q-3 0 -3 -1q-1 0 1 -2q2 -1 -5 -7q-3 -3 1 -1zM121 29q1 1 5 2q5 2 7 4t2 3q-1 2 -4 1q-7 -5 -41 11q-6 3 -2 -2q-28 7 -44 3q-6 -1 0 -1q19 0 54 -10q15 -4 15 -9q0 -4 8 -2zM79 98q-1 1 -6 7q-15 16 -29 25
+                        q-2 2 -2 0q1 -2 3 -3l4 -4q26 -25 27 -34h1q-28 8 -55 15q-4 3 -12 0q-3 -2 0 -2q26 -4 62 -15q-6 -4 -4 -13q0 -2 1 -2q2 -1 2 1q0 3 9 -2q4 -3 1 1q-9 9 -1 12q13 -7 23 -21q4 -5 2 -7q-2 -1 -2 -2q1 -1 3 -1q5 1 10 5q2 2 2 3t-3 2q-3 0 -6 4q-4 4 -21 16q22 -5 24 -8
+                        q3 -4 8 -2q8 2 15 7l2 1q0 1 -2 2t-7 0q-1 -1 -2 -1q-9 -4 -37 4q-4 0 -9 2q2 9 -1 10zM99 134v-1q22 7 36 20q3 3 -2 7q-2 2 -6 -2q-11 -11 -27 -22q8 49 -16 77q-1 2 -3 2q-2 -1 -2 -3q1 -4 -9 -13q-2 -1 -5 -7t2 -2q4 4 17 9q4 2 8 -5q9 -21 1 -61q-4 5 -12 18
+                        q-5 8 -8 13q-33 51 -50 58q-6 3 -1 -1q41 -38 68 -96q0 -1 -1 -2q-3 -4 -6 -6q-10 17 -29 32q-5 4 -2 -1q19 -16 27 -35q0 -1 -3 -4q-3 -5 1 -2q16 7 20 18q0 -1 1 -1q23 -14 23 -25q1 -2 2 -2l1 2q4 7 2 8q-14 16 -27 19q0 1 -1 1v2q1 2 1 5zM201 19q2 1 6 4q2 1 3 2
+                        q4 5 -2 7q-5 1 -8 5q-5 7 -11 23q-2 8 3 7q3 -1 10 -4q2 -2 3 -2q1 -3 11 3q2 4 -2 4q-10 0 -15 4q-23 19 -49 44q16 -4 24 -10q6 -7 11 -3q1 1 4 2q5 4 8 5t2 3q-1 3 -5 4t-7 9q-5 15 -16 36q7 11 24 34q-1 -1 2 2q3 4 18 4q18 1 37 9q2 2 2 3t-3 0q-1 0 -3 -1
+                        q-16 -2 -29 -2q-16 0 -22 -8q-12 -11 -29 -37q-24 35 -42 47q-6 5 -1 -2q20 -17 40 -49q-4 -6 -14 -17q-1 -2 -2 -3q-4 -4 -11 1q-4 3 -2 -2q12 -11 16 -6q9 15 15 22q12 -19 17 -44q1 -3 0 -4t-5 0q-20 6 -34 15q-4 2 -5 2t0 -4q1 -7 8 -10q27 -18 42 -39q-9 3 -7 -12
+                        q1 -2 2 -7q2 -7 8 -22q1 -3 0 -4q-2 0 -5 1q-16 5 -29 11q-4 34 -10 47q-4 4 -7 -2q0 -7 3 -11q5 -8 8 -23q2 -12 -7 -20q-3 -3 2 -2q6 2 10 8q11 -8 18 -9q6 -1 13 -8q5 -6 12 -1z"
+                    id="path1231"/>
+            </clippath>
+        </svg>
     </div>
 
     <div>
-  		<video width="400" controls loop autoplay>
-  		  <source src="3.mp4" type="video/mp4">
-  		</video>
-    </div>
-
-    <div>
-      展示區 (姓名)
-      <hr>
-      <img width="256" src="./Hsu.svg">
-      <img width="256" src="./Bang.svg">
-      <img width="256" src="./Yi.svg">
-    </div>
-
-    <div>
-      Drag and Drop 展示區 (接收任何SVG)
+        展示區 (姓名)
+        <hr>
+        <img id="Hsu" width="256" src="./Hsu.svg">
+        <img id="Bang" width="256" src="./Bang.svg">
+        <img id="Yi" width="256" src="./Yi.svg">
+        <br/>
+        <img id="Hsu" width="256" src="./Hsu_path.svg">
+        <img id="Bang" width="256" src="./Bang_path.svg">
+        <img id="Yi" width="256" src="./Yi_path.svg">
+        <br/>
     </div>
 
     <script type="text/javascript">
-      // Your beautiful D3 code will go here
+        // Your beautiful D3 code will go here
+        for (let i = 1; i <= 10; i++) {
+            $("#speed").append(new Option(i, i));
+        }
+        $("#replay").bind("click",changeVal);
+        changeVal();
+
+        function changeVal() {
+            setPathCss(5, "#56008F", "#ypath", "#yclip");
+            setPathCss(5, "#56008F", "#xpath", "#xclip");
+            setPathCss(5, "#56008F", "#zpath", "#zclip");
+        }
+
+        function setPathCss(speed, color, id, cid) {
+            var obj = $(id).find('path');
+            var total = 0;
+            $(id).css('fill', 'none');
+            $(id).css('stroke-width', '20');
+            $(id).css('stroke', color);
+            $(id).css('clip-path', 'url(' + cid + ')');
+            for (let i = 0; i < obj.length; i++) {
+                $('#' + obj[i].id).css('animation', '');
+            }
+            for (let i = 0; i < obj.length; i++) {
+                var length = obj[i].getTotalLength();
+                $('#' + obj[i].id).css("opacity", 0);
+                $('#' + obj[i].id).css("stroke-dasharray", length);
+                $('#' + obj[i].id).css("stroke-dashoffset", length);
+                $('#' + obj[i].id).css("animation", "letterDraw linear forwards " + length * speed / 1000 + 's ' + total * speed / 1000 + 's');
+                total += length;
+            }
+        }
     </script>
-  </html>
-  
+
+</html>
