@@ -1,0 +1,33 @@
+App	
+Category	
+Rating
+Reviews	Size
+Installs
+Type
+Price
+Content Rating
+	Everyone = 0
+	Everyone 10+ = 0
+	Teen = 1
+	Mature 17+ = 1
+Genres
+	Board = 0
+	Sports = 1
+	Action = 2
+	Casual = 3
+	Arcade 4
+	Simulation 5
+	Puzzle 6
+	Strategy 7
+	Role Playing 8
+	Racing 9
+	Adventure 10
+	Music 11
+	Trivia 12
+	Card 13
+	Word 14
+	Educational 15
+
+Last Updated
+Current Ver
+Android Ver
